@@ -1,0 +1,38 @@
+//	Claude
+Project context: @_bmad-output/planning-artifacts/product-brief-turno-2026-01-07.md, @_bmad-output/planning-artifacts/architecture/index.md, @_bmad-output/planning-artifacts/prd/index.md, @_bmad-output/planning-artifacts/project-context.md, @_bmad-output/planning-artifacts/epics/index.md
+
+Run @.claude/commands/bmad/bmm/code-review.md for all work done for @_bmad-output/orchestration/feedback-automator/run-20260123-005038.md 
+
+Append all updates that should be referenced by QA to CHANGELOG.md. Prepend with the result from running `Bash(date +"%y%m%d-%H:%M:%S")`
+
+Understand context by reading anything necessary to know how the project is structured and what the project's
+intent is. Find and understand this by going through files in @_bmad-output/planning-artifacts/
+Go through every single story in @_bmad-output/implementation-artifacts/ using multipe agents. Tie the related
+ones together for a single agent to handle. Tie by domain so that each agent ideally doesn't need to read the same
+files, though foundational files are ofc necssary.
+
+Use Opus for difficult tasks and Sonnet for easier ones.
+
+After every agent has provided a review, the main agent(You) should have received reports from every agent.
+Consolidate the information into a single file and output into @_bmad-output/manual-reviews
+
+There are a LOT of issues that i have verified, there should be more than 10 CRITICAL issues and more than 20
+other ones.
+If not, review which domains should be run again and run review cycles again for necessary ones until you have
+enough reviews.
+
+DO NOT STOP unless there is a CRITICAL issue that needs user input. Be autonomous and do not stop unless finished
+
+BE EXTRA VIGILENT in being context-efficient, you just ran this and had to stop due to running out of context.
+
+
+
+
+
+//	Codex
+Reference @_bmad-output/manual-reviews/epics-5-8-code-review-2026-01-22.md
+It was conducted by a much inferior llm than yourself, so treat it as a reference and address all issues
+
+
+//	Codex
+Based on what you fixed and what should be understood for future reference, update any of the files that have become effectively outdated in @_bmad-output/planning-artifacts/

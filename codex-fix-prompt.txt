@@ -1,0 +1,16 @@
+<Reference>
+Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
+
+Implementation: _bmad-output/implementation-artifacts/
+
+- Append all updates that should be referenced by QA according to CHANGELOG.md. 
+- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user.
+- YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
+- Read extra files iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. You are the consumer and implementor, not the researcher.
+- Based on the difficulty of each delegated task, assign gpt-5.1-codex-mini / gpt-5.2-codex adaptively for subagents.
+- Use gpt-5.2 adaptively for research tasks
+</Reference>
+
+
+
+Create a worktree, enter worktree, and implement 

@@ -1,0 +1,19 @@
+<Init>
+Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
+
+Implementation: _bmad-output/implementation-artifacts/
+
+- Append all updates that should be referenced by QA according to CHANGELOG.md. 
+- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
+- YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
+- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example.
+- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku ONLY for VERY SIMPLE manual tasks, for any case that touches backend code or important logic, use opus by default.
+</Init>
+
+CRITICAL: Execute the STEPS in order.
+Target: EPIC 30
+STEP1: Use multiple opus subagents to effectively Review all stories from the epic. Make them reference each story and confirm whether things were implemented correctly.
+STEP2: Consolidate the reviews
+STEP3: Use multiple opus subagents to apply the reviews
+STEP4: For any review that had any significant change, go back to STEP1 and repeat for those.
+STEP5: Provide a comprehensive summary and update `CHANGELOG.md` according to the file.

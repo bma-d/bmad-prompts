@@ -1,0 +1,15 @@
+<Init>
+Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
+
+Implementation: _bmad-output/implementation-artifacts/
+
+- Append all updates that should be referenced by QA according to CHANGELOG.md. 
+- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
+- YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
+- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example.
+- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku ONLY for VERY SIMPLE manual tasks, for any case that touches backend code or important logic, use opus by default.
+</Init>
+
+Linear issue: 
+
+Launch subagents to make the issues more specific for an LLM that will work on it. Your task is NOT to create a tasklist, but to make them more specific. After all bullet points have been made more specific, output them into a file in @docs-from-user/feedback/ Make sure the filename is `{Bash(date +"%y%m%d-%H%M")}-{##}.md`(Run the command) with ## as the no. of feedback

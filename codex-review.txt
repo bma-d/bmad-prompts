@@ -1,0 +1,5 @@
+Review the entirety of the @frontend. Start by using multiple subagents to first figure out how to clearly divide the review into multiple
+segments, then use multiple subagents to review every segement. Your focus should be the tests, make sure all of them are sound and proper
+After every subagent returns with a review, produce a consolidated review doc. 
+
+Review all changes made comparing the latest commit to d3b4208a4fabc8a426c8195da20af397fc8f596e
