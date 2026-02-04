@@ -1,7 +1,8 @@
 <Init>
 Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
 
-Implementation: _bmad-output/implementation-artifacts/
+Implemented stories: _bmad-output/implementation-artifacts/
+Recent update Changelogs: docs/changelog/
 
 - Append all updates that should be referenced by QA according to CHANGELOG.md. 
 - Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well

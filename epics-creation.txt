@@ -1,3 +1,7 @@
+# Agentic-JIT
+MUST READ: @AGENTS.md, @.agents/AGENTS.md
+
+# prompt
 Run @_bmad/bmm/workflows/3-solutioning/create-epics-and-stories/workflow.md
 
-Run create-epics-and-stories for the LATEST file from @docs-from-user/feedback/
+Run create-epics-and-stories for the contents in @docs-feedback/260201-0344-07.md, that are NOT done.

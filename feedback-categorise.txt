@@ -16,26 +16,12 @@ Recent update Changelogs: `docs/changelog/`
 
 # Prompt
 
-## Prompt example context
-[Input]
-I need a provider view for providers
-[Ouput]
-**Request**: Separate menu for providers; default page when provider logs in. Mobile/tablet optimized, patient info access, reception notifications.
+CRITICAL: Execute the STEPS in order. NO CODE CHANGES, assume you are in planning mode.
 
-**Current State**:
-- `Provider` role exists in schema but has NO permissions in `featurePermissions` matrix in `useRBAC.ts`
-- ...
+STEP1, Read the LATEST feedback file from @docs-feedback/
 
-**Specific Implementation**:
-- Create `/[locale]/(auth)/provider/page.tsx` as provider dashboard (default after login)
-- ...
+STEP2, Assess the difficulty level of implementation for each feedback on a level of 1 to 5. Level 1 being a quick CSS fix with 0 potential blast radius. Level 5 is something that needs a vast amount of context and planning before implementing and can potentially break multiple other things via VERY difficult to figure out side effects.
 
-**Key Files**:
-- `frontend/src/hooks/useRBAC.ts` - add Provider permissions
-- ...
+STEP3, create a full report on the difficulty assessment and reasoning behind them with a recommended implementation order. Split the feedback that is considered easy into {filename}-easy.md using a python script.
 
-## Actual prompt
-
-The following is feedback. They are abstract, launch subagents to make them more specific. Your task is NOT to create a tasklist for each feedback points, but to make them more specific. After all bullet points have been made more specific, output them into a file in @docs-feedback Make sure the filename is `{Bash(date +"%y%m%d-%H%M")}-{##}.md`(Run the command) with ## as the no. of feedback
-
-- Get the linear issues via the linear plugin TWO-34, TWO-83, TWO-85, TWO-84, TWO-79. This is the feedback
+STEP4, Update the assessment into the original feedback file, remove the easy feedback from the original file

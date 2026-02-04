@@ -1,27 +1,40 @@
-<Init>
+# Agentic-JIT
+MUST READ: @AGENTS.md, @.agents/agentic-jit-framework.md
+CRITICAL, ONLY read when the provided task is making ANY updates to code: .agents/context-refresh-playbook.md
+
+
+# Init
 Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
 
-Implementation: _bmad-output/implementation-artifacts/
+Implemented stories: _bmad-output/implementation-artifacts/
+Recent update Changelogs: docs/changelog/
 
 - Append all updates that should be referenced by QA according to CHANGELOG.md. 
 - Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
 - YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
 - Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example.
 - Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku ONLY for VERY SIMPLE manual tasks, for any case that touches backend code or important logic, use opus by default.
-</Init>
 
-[TASKS]
-CRITICAL: This task requires NO CODE CHANGES
 
-Step1: Use two sub-agents to traverse through the front and the back end and figure out potential features that can be gated by a pricing tier. Use Opus and make sure this is an extensive report
+# Prompt
 
-Step2: Consolidate the information and use multiple sub-agents to verify the consolidated information(BE and FE should have suggested roughly the same features)
 
-Step3: Based on the verification, provide a list of features that can be gated and how it can be done.
+//	react-docs refactor
+CRITICAL: Execute the STEPS in order.
+STEP1: Use 2 opus subagents to analyse docs-for-llm/react-docs/you-might-not-need-an-effect.md and docs-for-llm/react-docs/reusing-logic-with-custom-hooks.md and define a total of ~10 different rules for subagents to search for the codebase and fix.
+STEP2: Launch as many subagents as patterns you have defined to go through the codebase and apply the refactors. The subagents should return breadcrumbs of what was done.
+STEP3: Launch the same amount of subagents to review the updated files from the previous subagents. Return a summary to the main agent.
+STEP4: If there are issues, address them with subagents and repeat.
+STEP5: Provide a summary to the user
 
-Wait for the user's confirmation, future steps will be provided with my feedback.
 
-Step4: Reference the user's feedback and create a `docs/FEATURE_GATE_PLAN.md` with a high level plan on how to implement
+
+//	Vercel refactor
+Use multiple subagents to reference every aspect from the vercel-react-best-practices skill to increase the quality of the frontend code. This is a refactor, nothing should break post refactor.
+
+After the subagents provide reports, consolidate the information and task multiple subagents s.t. there are minimal conflicts to address all the issues found. 
+
+
 
 
 
@@ -39,7 +52,3 @@ STEP4: Update CHANGELOG.md
 
 
 
-//	Vercel refactor
-Use multiple subagents to reference every aspect from the vercel-react-best-practices skill to increase the quality of the frontend code. This is a refactor, nothing should break post refactor.
-
-After the subagents provide reports, consolidate the information and task multiple subagents s.t. there are minimal conflicts to address all the issues found. 
