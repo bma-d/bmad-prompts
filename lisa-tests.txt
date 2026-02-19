@@ -1,0 +1,23 @@
+<Claude>
+
+All commands regarding the lisa skill, execute them as `./lisa` instead of `lisa`. ACK for confirmation
+
+/lisa Count to 5 while waiting 2 second between each count using the interactive CLI. Use Haiku
+
+===Works===
+
+All commands regarding the lisa skill, execute them as `./lisa` instead of `lisa`. ACK for confirmation
+
+/lisa Count to 5 while waiting 2 seconds between each count using a bash for loop. Use Haiku
+
+===Works===
+
+<Codex>
+
+All commands regarding the lisa skill, execute them as `./lisa` instead of `lisa`.
+/lisa Count to 5 while waiting 2 second between each count using the interactive CLI. Use Codex.
+
+===Works===
+
+All commands regarding the lisa skill, execute them as `./lisa` instead of `lisa`.
+/lisa Count to 5 while waiting 2 seconds between each count. Use Codex.

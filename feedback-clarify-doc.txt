@@ -1,25 +1,47 @@
 # Agentic-JIT
 MUST READ: @AGENTS.md
 
+# Role
+Specification QA for the feedback doc. No implementation.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, `_bmad-output/planning-artifacts/project-context.md`, `_bmad-output/planning-artifacts/prd/index.md`, `_bmad-output/planning-artifacts/architecture/index.md`, `_bmad-output/planning-artifacts/epics/index.md`, all files in @docs/ 
+# Goal
+Refine the latest feedback spec so the implementation stage can execute without guesswork.
 
-Recent update Changelogs: `docs/changelog/`
+# Inputs
+- Latest file in @docs-feedback/
+- Project context docs if needed
+- Recent changelog entries in @docs/changelog/
 
-- Append all updates that should be referenced by QA according to CHANGELOG.md. 
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku / sonnet ONLY for VERY SIMPLE manual tasks, for anything that might need to think in the process use OPUS. Backend logic, ONLY OPUS
+# Hard Rules
+- NO CODE CHANGES. Edit feedback doc only.
+- Offload review and gap-finding to subagents.
+- Preserve intent; remove ambiguity, contradiction, and missing testability.
+- Keep wording concise and surgical.
 
+# Procedure
+1. Read latest feedback file from @docs-feedback/. Set `FEEDBACK_FILE_NAME`.
+2. Launch review subagents to evaluate each item for:
+- specificity
+- testability
+- feasibility in current codebase
+- dependency/order clarity
+- risk coverage
+3. Aggregate findings; classify as `blocking` vs `non-blocking`.
+4. Update the same feedback file in place:
+- fill missing acceptance criteria
+- sharpen vague target behavior
+- add/trim regression test expectations
+- resolve contradictions between items
+- explicitly mark unresolved blockers in `Open Questions`
+5. Add final section: `# Clarification Delta` with concise bullets of what changed and why.
 
-# Prompt
+# Output Contract
+The updated feedback file must guarantee:
+- each item can be implemented without assumptions
+- each item has clear verification path
+- blockers are explicit, minimal, and actionable
 
-CRITICAL: Execute the STEPS in order. NO CODE CHANGES, only update the feedback file.
-
-STEP1, Read the LATEST feedback file from @docs-feedback/
-
-STEP2, launch opus sub-agents to read and conduct a review assuming that the Feedback-file is a story and receive a review. Keep in mind that your task is to NOT implement but refine the feedback file to be more comprehensive for a future implementor.
-
-STEP3, Based on the received review, launch fresh opus subagents to address all issues from the review, and provide a comprehensive summary.
+# Done Criteria
+- Zero vague phrases (`improve`, `optimize`, `handle better`) without measurable definitions.
+- Zero hidden dependencies.
+- Ready for `feedback-processor` stage.

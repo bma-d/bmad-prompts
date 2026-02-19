@@ -1,0 +1,16 @@
+Automation TODO
+
+What I need for Pareto rule automations is a way to teach Claude or Codex how to manage tmux sessions, and access those sessions, and send keys so that they can reliably manage / interact with them.
+
+tmux session spawning, sending keys, reliably reading the state of the tmux session deterministically and making decisions is necessary.
+
+Once that is tested and confirmed to work, then any agent now can spawn instances of Claude or Codex whenever they wish. And then I can start creating workflows that need to do multiple different launches of a coding agent in succession. Or create a generic framework where there's an orchestrator, it checks the workflow and executes it. And I would have multiple workflows that the orchestrator can orchestrate through. Either way, there needs to be a research session with AI agents to make sure that the tmux key send requests are thoroughly confirmed.
+
+Once that happens, the first thing to do is to automate the feedback process. As in, I just simply throw the linear issue IDs and it goes through the three prompts I use to refine the linear issue by agents' preference in the codebase and creating a plan on how to implement, and then also go through the processing process, the review cycle, and the test automations.
+
+Once they're just set in stone, this will enter the 90% of the peritual in my opinion, but start setting up a Tmux cron job that runs every one hour, where it simply checks linear for issues, groups up the ones that are relevant to each other, and then launches the feedback automation by itself, and just does the whole flow, and figures it all out.
+
+
+In order for this to work though, I think what I need to set up first is instead of deploying directly to Vercel, I need to create PRs so that there are PR links that can be thrown back to QA before anything is even merged to staging. But that creates complications because the staging backend is only one and it's going to be way too heavy to deploy multiple different backend instances for every single PR.
+
+So, at the end of the day, I think there needs to be a bit more thought into how to create this feedback loop in an efficient way. That actually works, I guess. But this is exactly where I would like to brainstorm a bit.

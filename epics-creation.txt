@@ -1,7 +1,13 @@
 # Agentic-JIT
-MUST READ: @AGENTS.md, @.agents/AGENTS.md
+MUST READ: @AGENTS.md
+
+Reference files proactively based on the @.agents/agentic-jit-framework.md and @.agents/agent-implementation-protocol.md
 
 # prompt
 Run @_bmad/bmm/workflows/3-solutioning/create-epics-and-stories/workflow.md
 
-Run create-epics-and-stories for the contents in @docs-feedback/260201-0344-07.md, that are NOT done.
+Run create-epics-and-stories for the contents in @docs-feedback/260211-0739-06.md. Keep in mind there are existing epics in @_bmad-output/planning-artifacts/epics/index.md. Make sure to adhere to the numbering
+
+
+
+Generate the epic files adhering to the @_bmad-output/planning-artifacts/epics/ folder and update related files accordingly. Use python scripts to split efficiently if required.

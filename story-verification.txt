@@ -11,7 +11,7 @@ Recent update Changelogs: `docs/changelog/`
 - Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
 - YOU are the implementor. BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
 - Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku / sonnet ONLY for VERY SIMPLE manual tasks, for anything that might need to think in the process use OPUS. Backend logic, ONLY OPUS
+- Based on the difficulty of each delegated task, assign gpt-5.1-codex-mini / gpt-5.2-codex adaptively for subagents.
 
 
 # Prompt
@@ -20,14 +20,10 @@ Read
 
 Your task is to use multiple subagents to verify the contents and address potential issues with ACs and Schema changes. First get an overview of what needs to be changed from the first batch of subagents, consolidate, then send out a 2nd batch of subagents to verify and fix. Iterate if any subagents returned that during verification there were extra issues to address.
 
+_bmad-output/planning-artifacts/epics/epic-44-critical-fixes-notifications-reminders-booking.md
+_bmad-output/planning-artifacts/epics/epic-45-appointment-indicators-patient-navigation.md
+_bmad-output/planning-artifacts/epics/epic-46-insurance-copay-plus-system.md
+_bmad-output/planning-artifacts/epics/epic-47-booking-flow-accessibility.md
+_bmad-output/planning-artifacts/epics/epic-48-whatsapp-feedback-satisfaction-dashboard.md
 
 
-
-
-
-
-
-
-
-
-- Based on the difficulty of each delegated task, assign gpt-5.1-codex-mini / gpt-5.2-codex adaptively for subagents.

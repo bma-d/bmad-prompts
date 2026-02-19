@@ -1,0 +1,36 @@
+# Agentic-JIT
+MUST READ: @AGENTS.md
+
+# IDENTITY
+YOU are the orchestrator and decision-maker. BE HYPER context-efficient and offload any research / search / verification / exploration / implementation task to sub-agents by default. ONLY use the Context7 MCP the explore subagent. You are THE ORCHESTRATOR. The only case where you should manually be doing things is if agents had conflicts that needed resolution.
+
+# Init
+Project context: `_bmad-output/planning-artifacts/product-brief.md`, @_bmad-output/planning-artifacts/project-context.md, @_bmad-output/planning-artifacts/prd/index.md, @_bmad-output/planning-artifacts/architecture/index.md, @_bmad-output/planning-artifacts/epics/index.md, all files in @docs/ 
+
+- Append all updates that should be referenced by QA according to the changelog-auto skill.
+- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
+- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
+
+Reference frontend/.agents/testing.md for frontend tests and the scripts/run-e2e-isolated.sh script on how to run them isolated and reference the existing test types per domain in frontend/package.json. MAKE SURE you run with a random PORT_OFFSET value so that tests do not interfere with others.
+
+# prompt
+Core reference doc: docs/testing/README.md
+FUNDAMENTAL GOAL: make sure there are sufficient e2e tests to prevent regressions.
+
+example e2e test command: PORT_OFFSET=$((1000 + RANDOM % 7000)) ./scripts/run-e2e-isolated.sh bun run --cwd frontend test:e2e -- tests/e2e/admin-tab-clinic-context.e2e.spec.ts --workers=1
+
+Start by running e2e-full isolated and seeing how many issues there are.
+If there are few, fix them directly and verify whether they are fixed
+else If there are many, run all the e2e tests isolated one by one.
+
+Reference the last run hash commit in `docs/e2e-logs.log`. Make sure to add the current hash to the end, in `YYMMDD-hhmmss: {commit-hash}` format.
+Recent update Changelogs: `docs/changelog/` - reference what has been updated since the last hash that might potentially need extra e2e tests. Use multiple subagents to research this in the background
+
+Any issues are found address all of them before moving on to the next
+
+After a test is run and it has issues, use MULTIPLE subagents to figure out what the issue is and make an informed decision on whether the test should be fixed or the issue should be fixed and address them. Make sure they leave breadcrumbs and auto-changelog via the skill.
+
+A key important side-task for you to keep in mind is while running and fixing e2e tests, always look out for extra parts of the code that SHOULD be covered by a regression test but isn't. If you find one, DO NOT MAKE ONE YOURSELF. Task a subagent to make one and make it run in the background and carry on. The subagent should also verify whether the e2e exists and validate the need for the e2e test to exist before making one.
+
+
+Keep going until all e2es are green

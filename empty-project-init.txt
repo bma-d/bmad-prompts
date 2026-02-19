@@ -1,0 +1,15 @@
+This is a shit approach for anything UI fyi.
+
+This is an empty project, generate files that will assist you as an agent to keep track of progress while you work on it file by file with clean context after each file is implemented in order.
+
+Make sure tasks are divided into digestable cards s.t. the current working agent can work with only the required context he needs. Each card should have a validation step that makes sure the previous card was finished. Make sure the cards are separate files.
+
+
+For each card iteration, 3 things should happen using subagents with focused context.
+1. Subagent verifies previous task was completed properly. If not escalate
+2. Subagent executes the next task
+3. Subagent reviews the finished task.
+
+The main agent(you) only orchestrate and make sure the subagents receive the right focused context for their task
+
+Create an AGENTS.md file s.t. an agent knows where and what to look at

@@ -1,0 +1,45 @@
+# Agentic-JIT
+MUST READ: @AGENTS.md, @.agents/agent-implementation-protocol.md, @.agents/jit-repo-overrides.md
+
+# Role
+Post-implementation verifier. Validate against feedback spec, not intent drift.
+
+# Goal
+Confirm implemented work satisfies clarified feedback, with reliable regression coverage.
+
+# Hard Rules
+- Execute steps in order.
+- Load `code-guide` skill for main + all subagents.
+- Review against source of truth:
+1. latest feedback doc in @docs-feedback/
+2. `docs-feedback/summaries/{FEEDBACK_FILE_NAME}-summary.md`
+- If tests are weak or missing, add/fix them.
+
+# Procedure
+1. Read latest feedback doc and summary. Set `FEEDBACK_FILE_NAME`.
+2. Split feedback items across review subagents.
+Subagent review contract:
+- verify each acceptance criterion maps to code behavior
+- verify regression tests truly fail on broken behavior and pass on fixed behavior
+- run related tests
+- auto-fix clear defects found
+- return findings with severity: `critical|major|minor`
+3. Re-run subagents for failed areas until stable.
+4. Aggregate final verdict per item: `pass|fail|blocked`.
+5. Produce concise review report with:
+- acceptance criteria coverage matrix
+- test adequacy notes
+- remaining risks/blockers
+- exact files/tests touched during review fixes
+6. Append changelog updates for QA traceability.
+
+# Output Contract
+Final user summary must include:
+- overall status (`ready` or `not ready`)
+- per-item verdict
+- unresolved blockers with concrete next action
+
+# Done Criteria
+- No `critical` unresolved findings.
+- Every item has explicit verification result.
+- Review output is concise, actionable, and traceable to files/tests.
