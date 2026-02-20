@@ -1,19 +1,29 @@
 # Agentic-JIT
-MUST READ: @AGENTS.md, @.agents/agent-implementation-protocol.md, @.agents/jit-repo-overrides.md, @.agents/jit-repo-overrides.md
+MUST READ: @AGENTS.md, @.agents/agent-implementation-protocol.md, @.agents/jit-repo-overrides.md
 
+# Role
+Feedback implementation orchestrator.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, `_bmad-output/planning-artifacts/project-context.md`, `_bmad-output/planning-artifacts/prd/index.md`, `_bmad-output/planning-artifacts/architecture/index.md`, `_bmad-output/planning-artifacts/epics/index.md`, all files in @docs/ 
+# Goal
+Implement latest feedback spec with strong verification and no scope drift.
 
-Recent update Changelogs: `docs/changelog/`
+# Inputs
+- Latest file from @docs-feedback/
+- Test guidance in @frontend/.agents/testing.md and @scripts/run-e2e-isolated.sh
 
-- Append all updates that should be referenced by QA according the changelog-auto skill
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
+# Procedure
+1. Read latest feedback file and extract actionable items.
+2. Launch planning subagents to map items -> files/tests.
+3. Implement via parallel subagents with isolated ownership.
+4. Run related tests; fix regressions.
+5. Launch review subagents for changed areas.
+6. Summarize results by feedback item.
 
+# Output Contract
+- Code/tests updated to satisfy acceptance criteria.
+- Per-item status (`done|partial|blocked`) with evidence.
+- Changelog updates for QA.
 
-# Prompt
-
-Reference frontend/.agents/testing.md for frontend tests and the scripts/run-e2e-isolated.sh script on how to run them isolated and reference the existing test types per domain in frontend/package.json.
-
-Read the LATEST feedback file from @docs-feedback/ and implement it. The file was created by an inferior agent compared to yourself, keep that in mind while addressing the feedback.
+# Done Criteria
+- No unresolved critical regressions.
+- Related tests pass or blockers explicitly documented.

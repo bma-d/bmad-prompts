@@ -2,7 +2,7 @@
 MUST READ: @AGENTS.md
 
 # Role
-Specification QA for the feedback doc. No implementation.
+Specification QA for the feedback doc. Orchestrate subagents. No implementation.
 
 # Goal
 Refine the latest feedback spec so the implementation stage can execute without guesswork.

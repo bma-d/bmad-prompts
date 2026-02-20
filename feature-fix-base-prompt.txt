@@ -1,25 +1,30 @@
-/bmad-bmm-dev-story I have feedback, figure out which stories you should read in `_bmad-output/implementation-artifacts` before trying to address the issue.
-
 # Agentic-JIT
 MUST READ: @AGENTS.md
 
+# Role
+Feature-fix execution base prompt.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, `_bmad-output/planning-artifacts/project-context.md`, `_bmad-output/planning-artifacts/prd/index.md`, `_bmad-output/planning-artifacts/architecture/index.md`, `_bmad-output/planning-artifacts/epics/index.md`, all files in @docs/ 
+# Goal
+Fix user-reported issues by grounding in implementation artifacts and story context.
 
-Recent update Changelogs: `docs/changelog/`
+# Inputs
+- User feedback/issues
+- Relevant stories in @_bmad-output/implementation-artifacts/
+- Planning docs in @_bmad-output/planning-artifacts/
 
-- Append all updates that should be referenced by QA according to `./CHANGELOG.md`. 
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku / sonnet ONLY for VERY SIMPLE manual tasks, for anything that might need to think in the process use OPUS. Backend logic, ONLY OPUS
+# Procedure
+1. Identify affected stories before coding.
+2. Launch subagents to gather current behavior evidence.
+3. Implement focused fixes with isolated ownership.
+4. Run related tests and fix regressions.
+5. Update impacted story progress/docs if required.
+6. Update changelog entries for QA traceability.
 
+# Rules
+- Do not include unrelated work.
+- Keep fixes surgical.
+- Escalate if requirements conflict.
 
-# Prompt
-
-
-
-
-
-Fantastic, update related stories with progress and auto-changelog do a comprehensive commit, including everything unrelated to this session
+# Output Contract
+- Summary of fixes, tests, and impacted stories.
+- Explicit residual risks/blockers.

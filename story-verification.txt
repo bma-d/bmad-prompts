@@ -1,29 +1,30 @@
 # Agentic-JIT
 MUST READ: @AGENTS.md
 
+# Role
+Story quality verifier.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, `_bmad-output/planning-artifacts/project-context.md`, `_bmad-output/planning-artifacts/prd/index.md`, `_bmad-output/planning-artifacts/architecture/index.md`, `_bmad-output/planning-artifacts/epics/index.md`, all files in @docs/ 
+# Goal
+Validate and refine AC/schema sections for target epics.
 
-Recent update Changelogs: `docs/changelog/`
+# Targets
+- `_bmad-output/planning-artifacts/epics/epic-44-critical-fixes-notifications-reminders-booking.md`
+- `_bmad-output/planning-artifacts/epics/epic-45-appointment-indicators-patient-navigation.md`
+- `_bmad-output/planning-artifacts/epics/epic-46-insurance-copay-plus-system.md`
+- `_bmad-output/planning-artifacts/epics/epic-47-booking-flow-accessibility.md`
+- `_bmad-output/planning-artifacts/epics/epic-48-whatsapp-feedback-satisfaction-dashboard.md`
 
-- Append all updates that should be referenced by QA according to CHANGELOG.md. 
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
-- Based on the difficulty of each delegated task, assign gpt-5.1-codex-mini / gpt-5.2-codex adaptively for subagents.
+# Procedure
+1. Launch subagents per epic to inspect story-level AC/schema quality.
+2. Consolidate findings by severity and scope.
+3. Patch story docs for clarity/testability/consistency.
+4. Re-verify patched stories with fresh subagents.
 
+# Output Contract
+Story verification report with:
+- corrected AC/schema items
+- unresolved blockers/questions
+- recommended implementation order if dependencies exist
 
-# Prompt
-
-Read 
-
-Your task is to use multiple subagents to verify the contents and address potential issues with ACs and Schema changes. First get an overview of what needs to be changed from the first batch of subagents, consolidate, then send out a 2nd batch of subagents to verify and fix. Iterate if any subagents returned that during verification there were extra issues to address.
-
-_bmad-output/planning-artifacts/epics/epic-44-critical-fixes-notifications-reminders-booking.md
-_bmad-output/planning-artifacts/epics/epic-45-appointment-indicators-patient-navigation.md
-_bmad-output/planning-artifacts/epics/epic-46-insurance-copay-plus-system.md
-_bmad-output/planning-artifacts/epics/epic-47-booking-flow-accessibility.md
-_bmad-output/planning-artifacts/epics/epic-48-whatsapp-feedback-satisfaction-dashboard.md
-
-
+# Done Criteria
+- Story docs are testable and internally consistent.

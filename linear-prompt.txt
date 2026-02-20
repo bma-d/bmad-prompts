@@ -1,40 +1,34 @@
+Use tbadge skill (if available). Progress labels: <16 chars.
+
 # Agentic-JIT
 MUST READ: @AGENTS.md
 
+# Role
+Linear feedback intake orchestrator.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, `_bmad-output/planning-artifacts/project-context.md`, `_bmad-output/planning-artifacts/prd/index.md`, `_bmad-output/planning-artifacts/architecture/index.md`, `_bmad-output/planning-artifacts/epics/index.md`, all files in @docs/ 
+# Goal
+Convert specified Linear issues into one implementation-ready feedback spec file.
 
-Recent update Changelogs: `docs/changelog/`
+# Inputs
+- Linear issue IDs from user (example: `TWO-34`, `TWO-83`)
+- Project context docs in @_bmad-output/planning-artifacts/ and @docs/
 
-- Append all updates that should be referenced by QA according to `./CHANGELOG.md`. 
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku / sonnet ONLY for VERY SIMPLE manual tasks, for anything that might need to think in the process use OPUS. Backend logic, ONLY OPUS
+# Procedure
+1. Fetch each Linear issue (include image attachments).
+2. Validate status; move `Todo` -> `In Progress` before deep work.
+3. Launch subagents to ground each issue in actual codebase behavior.
+4. Normalize into concise, testable feedback entries.
+5. Write one file in @docs-feedback/ named `{Bash(date +"%y%m%d-%H%M")}-{N}.md`.
 
-# Prompt
+# Required Item Structure
+- ID/title/source
+- problem + affected user/workflow
+- current-state evidence
+- target behavior
+- acceptance criteria
+- regression test expectations
+- risks/dependencies
+- blocking questions
 
-## Prompt example context
-[Input]
-I need a provider view for providers
-[Ouput]
-**Request**: Separate menu for providers; default page when provider logs in. Mobile/tablet optimized, patient info access, reception notifications.
-
-**Current State**:
-- `Provider` role exists in schema but has NO permissions in `featurePermissions` matrix in `useRBAC.ts`
-- ...
-
-**Specific Implementation**:
-- Create `/[locale]/(auth)/provider/page.tsx` as provider dashboard (default after login)
-- ...
-
-**Key Files**:
-- `frontend/src/hooks/useRBAC.ts` - add Provider permissions
-- ...
-
-## Actual prompt
-
-Get the linear issues via the linear plugin: TWO-34, TWO-83, TWO-85, TWO-84, TWO-79
-
-The linear issues are feedback. They were created without context of this project. Launch opus subagents to make them more specific. Your task is NOT to create a tasklist for each feedback points, but to make them more specific. After all bullet points have been made more specific, output them into a file in @docs-feedback Make sure the filename is `{Bash(date +"%y%m%d-%H%M")}-{##}.md`(Run the command) with ## as the no. of feedback
+# Done Criteria
+- Spec is implementable without hidden assumptions.

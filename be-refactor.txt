@@ -1,27 +1,37 @@
 # Agentic-JIT
 MUST READ: @AGENTS.md, @.agents/agentic-jit-framework.md
-CRITICAL, ONLY read when the provided task is making ANY updates to code: .agents/context-refresh-playbook.md
+CRITICAL (only if code changes): @.agents/context-refresh-playbook.md
 
+# Role
+Backend refactor orchestrator.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
+# Goal
+Raise Go backend quality using @docs-for-llm/effective-go/ without changing product behavior.
 
-Implemented stories: _bmad-output/implementation-artifacts/
-Recent update Changelogs: docs/changelog/
+# Inputs
+- Project context docs in @_bmad-output/planning-artifacts/
+- Implemented stories in @_bmad-output/implementation-artifacts/
+- Effective Go references in @docs-for-llm/effective-go/
 
-- Append all updates that should be referenced by QA according to CHANGELOG.md. 
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example.
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku ONLY for VERY SIMPLE manual tasks, for any case that touches backend code or important logic, use opus by default.
+# Rules
+- Subagent-first for research, scanning, verification.
+- Preserve behavior and API contracts.
+- Refactor in small batches to reduce conflicts.
 
+# Procedure
+1. Launch subagents to extract concrete refactor rules from @docs-for-llm/effective-go/.
+2. Merge into a deduped rule set with severity (`critical|major|minor`).
+3. Launch implementation subagents by domain/file ownership.
+4. Run targeted tests after each batch; fix regressions immediately.
+5. Launch fresh review subagents on changed files; autofix valid findings.
+6. Repeat until no `critical`/`major` findings remain.
 
-# Prompt
+# Output Contract
+- Refactored code with unchanged behavior.
+- Short report: rules applied, files touched, tests run, residual risks.
+- QA-facing changelog updates in @docs/changelog/.
 
-Use multiple subagents to reference each file from @docs-for-llm/effective-go/ to increase the quality of the backend Golang code. This is a refactor, nothing should break post refactor.
-
-After the subagents provide reports, consolidate the information and task multiple subagents s.t. there are minimal conflicts to address all the issues found.
-
-
-
-
+# Done Criteria
+- No unresolved `critical` findings.
+- Related tests pass.
+- Clear traceability from rule -> code change.

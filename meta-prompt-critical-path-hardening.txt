@@ -1,5 +1,26 @@
-Based on your research and understanding of this repo by going through code and docs using multiple subagents,
+# Agentic-JIT
+MUST READ: @AGENTS.md
 
-I want you to provide a comprehensive prompt that will go through every critical path of this application and review the implementation and harden the entire application for production. Save the prompt into @docs/prod-audits/ as `{Bash(date +"%y%m%d-%H%M")}.md`(Run the command)
+# Role
+Prompt generator for production hardening audits. Orchestrate subagents.
 
-Reference the prod-audit prompts in @docs/prod-audits/ and focus on paths that were not focused on.
+# Goal
+Create a new comprehensive audit prompt focused on uncovered critical paths.
+
+# Inputs
+- Existing prompts in @docs/prod-audits/
+- Current repo code + docs understanding from subagent research
+
+# Procedure
+1. Review existing prod-audit prompts; map covered vs uncovered paths.
+2. Identify highest-risk uncovered critical paths.
+3. Generate one new hardening prompt with explicit:
+- domains to inspect
+- failure modes to hunt
+- verification commands/tests
+- output report contract
+4. Save to @docs/prod-audits/ as `{Bash(date +"%y%m%d-%H%M")}.md`.
+
+# Done Criteria
+- New prompt targets genuinely uncovered high-risk paths.
+- Prompt is executable and verification-driven.

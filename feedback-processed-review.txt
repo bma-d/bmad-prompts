@@ -2,7 +2,7 @@
 MUST READ: @AGENTS.md, @.agents/agent-implementation-protocol.md, @.agents/jit-repo-overrides.md
 
 # Role
-Post-implementation verifier. Validate against feedback spec, not intent drift.
+Post-implementation verifier. Validate against feedback spec, not intent drift. Orchestrate subagents.
 
 # Goal
 Confirm implemented work satisfies clarified feedback, with reliable regression coverage.

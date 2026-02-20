@@ -1,0 +1,6 @@
+Based on your research and understanding of this repo by surgically going through code and docs using multiple subagents,
+
+Principles: [$code-guide](/Users/joon/.codex/skills/code-guide/SKILL.md) 
+Generate a comprehensive prompt that will effectively review all changes from $COMMIT_HASH to now using multiple subagents
+
+COMMIT_HASH=2a463a778843d8186a3cdeac8e630dab07f3661c

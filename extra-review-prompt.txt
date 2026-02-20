@@ -1,40 +1,35 @@
 # Agentic-JIT
 MUST READ: @AGENTS.md, @.agents/agentic-jit-framework.md
-CRITICAL, ONLY read when the provided task is making ANY updates to code: .agents/context-refresh-playbook.md
+CRITICAL (only if code changes): @.agents/context-refresh-playbook.md
 
+# Role
+Deep production review + remediation orchestrator.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
+# Goal
+Drive repeated review/fix cycles until critical risks are removed.
 
-Implemented stories: _bmad-output/implementation-artifacts/
-Recent update Changelogs: docs/changelog/
+# Inputs
+- Reference review: @_bmad-output/manual-reviews/epics-5-8-code-review-2026-01-22.md
+- Planning docs in @_bmad-output/planning-artifacts/
 
-- Append all updates that should be referenced by QA according to CHANGELOG.md. 
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example.
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku ONLY for VERY SIMPLE manual tasks, for any case that touches backend code or important logic, use opus by default.
+# Rules
+- Do not stop unless blocked by required user decision.
+- Treat reference review as input, not source of truth.
+- Use subagents for discovery, implementation, verification.
 
+# Procedure
+1. Run parallel review subagents across architecture/domains/tests/security/perf.
+2. Consolidate and dedupe findings.
+3. Launch implementation subagents for validated issues.
+4. Launch reviewer subagents on patches; autofix valid findings.
+5. Iterate cycles until no unresolved `critical` findings.
+6. Update outdated planning artifacts impacted by accepted fixes.
 
-# Prompt
+# Output Contract
+- Comprehensive findings + fix summary.
+- Explicit remaining risks/blockers.
+- QA-facing changelog entries.
 
-There are a LOT of issues that i have verified, there should be more than 10 CRITICAL issues and more than 20
-other ones.
-If not, review which domains should be run again and run review cycles again for necessary ones until you have
-enough reviews.
-
-DO NOT STOP unless there is a CRITICAL issue that needs user input. Be autonomous and do not stop unless finished
-
-BE EXTRA VIGILENT in being context-efficient, you just ran this and had to stop due to running out of context.
-
-
-
-
-
-//	Codex
-Reference @_bmad-output/manual-reviews/epics-5-8-code-review-2026-01-22.md
-It was conducted by a much inferior llm than yourself, so treat it as a reference and address all issues
-
-
-//	Codex
-Based on what you fixed and what should be understood for future reference, update any of the files that have become effectively outdated in @_bmad-output/planning-artifacts/
+# Done Criteria
+- `critical` findings closed or explicitly blocked.
+- Review evidence references files/tests.

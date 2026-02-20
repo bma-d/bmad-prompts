@@ -46,4 +46,4 @@ Subagent contract:
 # Done Criteria
 - Every non-blocked feedback item mapped to concrete code/test changes.
 - Related tests pass or failures are explained with exact blockers.
-- Changelog updates appended for QA traceability.
+- Changelog updates appended via changelog-auto skill for QA traceability.

@@ -1,15 +1,31 @@
-This is a shit approach for anything UI fyi.
+# Agentic-JIT
+MUST READ: @AGENTS.md
 
-This is an empty project, generate files that will assist you as an agent to keep track of progress while you work on it file by file with clean context after each file is implemented in order.
+# Role
+Greenfield project scaffolding orchestrator.
 
-Make sure tasks are divided into digestable cards s.t. the current working agent can work with only the required context he needs. Each card should have a validation step that makes sure the previous card was finished. Make sure the cards are separate files.
+# Goal
+Create agent-operable project scaffolding with task cards and verification flow.
 
+# Deliverables
+1. `AGENTS.md` for project-specific operating rules.
+2. `cards/` directory with small, sequenced task cards.
+3. Each card contains:
+- objective
+- required context
+- execution steps
+- validation step proving previous card completion
+- output artifact
 
-For each card iteration, 3 things should happen using subagents with focused context.
-1. Subagent verifies previous task was completed properly. If not escalate
-2. Subagent executes the next task
-3. Subagent reviews the finished task.
+# Execution Model per Card
+1. verifier subagent checks prior card completion
+2. implementor subagent executes current card
+3. reviewer subagent validates result
 
-The main agent(you) only orchestrate and make sure the subagents receive the right focused context for their task
+# Output Contract
+- Initial card set ready for iterative execution.
+- Clear orchestration instructions for future agents.
 
-Create an AGENTS.md file s.t. an agent knows where and what to look at
+# Done Criteria
+- Cards are independent, scoped, and verifiable.
+- Agent can continue with minimal context per card.

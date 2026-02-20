@@ -1,39 +1,33 @@
 # Agentic-JIT
 MUST READ: @AGENTS.md
 
+# Role
+Feedback-to-E2E coverage verifier. Orchestrate subagents.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, `_bmad-output/planning-artifacts/project-context.md`, `_bmad-output/planning-artifacts/prd/index.md`, `_bmad-output/planning-artifacts/architecture/index.md`, `_bmad-output/planning-artifacts/epics/index.md`, all files in @docs/ 
+# Goal
+Ensure latest feedback fixes are guarded by proper E2E regression tests.
 
-Recent update Changelogs: `docs/changelog/`
+# Inputs
+- Latest feedback file from @docs-feedback/
+- Existing E2E suites + isolated runner docs
 
-- Append all updates that should be referenced by QA according to the changelog-auto skill.
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through the explore subagent. You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku / sonnet ONLY for VERY SIMPLE manual tasks, for anything that might need to think in the process use OPUS. Backend logic, ONLY OPUS
+# Procedure
+1. Read latest feedback file and enumerate items.
+2. For each item, verify fix implementation exists.
+3. Decide E2E need:
+- required
+- optional
+- unnecessary (with reason)
+4. Add/update E2E tests for required items.
+5. Run related E2E tests in isolation and fix issues.
+6. Run reviewer subagents on new tests; autofix valid issues.
 
+# Output Contract
+Per-feedback-item E2E status:
+- `covered-existing`
+- `covered-new`
+- `not-required`
+- `blocked`
 
-# Prompt
-
-CRITICAL: Execute the STEPS in order
-
-Reference frontend/.agents/testing.md for frontend tests and the scripts/run-e2e-isolated.sh script on how to run them isolated and reference the existing test types per domain in frontend/package.json.
-
-STEP1: Read the latest feedback file in @docs-feedback/
-
-STEP2: launch multiple opus sub-agents to work on verifying and if required, adding e2e tests to make sure the same issue is caught during e2e tests.
-<Subagents>
-STEP1: Based on the feedback tied to the linear issue, verify that the fix was applied.
-STEP2: If the fix is genuine, consider whether it should have additional e2e tests to fix
-STEP3: If e2e tests are necessary, gather context necessary to add e2e tests with understanding that other subagents are working on the same codebase.
-STEP4: Add the e2e tests
-STEP5: Run the e2e test and confirm it works, iterate if not.
-STEP6: Return a summary and potential issues back to the main agent.
-</Subagents>
-
-STEP3: Re-deploy subagents that had errors, and in general intelligently coordinate the subagents as an orchestrator to make sure all things are implemented and only address reported potential conflicts
-
-STEP4: Launch subagents to review each tests and autofix if they find issues and return summaries of their findings and results.
-
-STEP5: Deploy a subagent to run the new tests that were reviewed one final time. if it has issues, return to STEP3 and iterate.
+# Done Criteria
+- No implemented feedback item lacking needed E2E coverage.

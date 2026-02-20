@@ -1,54 +1,38 @@
 # Agentic-JIT
 MUST READ: @AGENTS.md, @.agents/agentic-jit-framework.md
-CRITICAL, ONLY read when the provided task is making ANY updates to code: .agents/context-refresh-playbook.md
+CRITICAL (only if code changes): @.agents/context-refresh-playbook.md
 
+# Role
+Frontend refactor orchestrator.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, @_bmad-output/planning-artifacts/project-context.md, _bmad-output/planning-artifacts/prd/index.md, _bmad-output/planning-artifacts/architecture/index.md, _bmad-output/planning-artifacts/epics/index.md
+# Goal
+Improve frontend maintainability/performance while preserving behavior.
 
-Implemented stories: _bmad-output/implementation-artifacts/
-Recent update Changelogs: docs/changelog/
+# Refactor Profiles
+Select one profile from task context:
+- `react-docs`: derive rules from @docs-for-llm/react-docs/
+- `vercel`: apply @vercel-react-best-practices skill
+- `manual`: enforce local standards (render boundaries, Tailwind-first, shadcn/ui usage)
 
-- Append all updates that should be referenced by QA according to CHANGELOG.md. 
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- YOU are the implementor. Read extra files yourself iff necessary, BE HYPER context-efficient and offload any research / search / verification / exploration task to sub-agents by default. ONLY use the Context7 MCP through subagents You are the consumer and implementor, not the researcher.
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example.
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku ONLY for VERY SIMPLE manual tasks, for any case that touches backend code or important logic, use opus by default.
+# Rules
+- Subagent-first for rule discovery, implementation, review.
+- Keep changes scoped; avoid broad rewrites without evidence.
+- Do not ship regressions.
 
+# Procedure
+1. Build explicit refactor rule list (10+ for broad tasks).
+2. Split ownership by route/domain/component area.
+3. Implement in parallel subagent batches.
+4. Run affected tests/lint/type checks.
+5. Launch review subagents on changed files; autofix valid findings.
+6. Iterate until stable.
 
-# Prompt
+# Output Contract
+- Behavior-preserving refactors.
+- Summary: rules applied, changed files, test results, open risks.
+- Changelog updates for QA.
 
-
-//	react-docs refactor
-CRITICAL: Execute the STEPS in order.
-STEP1: Use 2 opus subagents to analyse docs-for-llm/react-docs/you-might-not-need-an-effect.md and docs-for-llm/react-docs/reusing-logic-with-custom-hooks.md and define a total of ~10 different rules for subagents to search for the codebase and fix.
-STEP2: Launch as many subagents as patterns you have defined to go through the codebase and apply the refactors. The subagents should return breadcrumbs of what was done.
-STEP3: Launch the same amount of subagents to review the updated files from the previous subagents. Return a summary to the main agent.
-STEP4: If there are issues, address them with subagents and repeat.
-STEP5: Provide a summary to the user
-
-
-
-//	Vercel refactor
-Use multiple subagents to reference every aspect from the vercel-react-best-practices skill to increase the quality of the frontend code. This is a refactor, nothing should break post refactor.
-
-After the subagents provide reports, consolidate the information and task multiple subagents s.t. there are minimal conflicts to address all the issues found. 
-
-
-
-
-
-//	manually defined refactor
-STEP1: split these into subagents to research what needs to be done.
-- Component logic should only cause re-renders for components that should be re-rendered, split them where possible.
-- This repo should ONLY be using tailwind unless it's deemed impossible to do with tailwind.
-- Shadcn/ui should be used where possible and if new components are needed generate them with the CLI and apply
-
-STEP2: Once you have a clear understanding of what needs to be done, use multiple subagents and task them with the refactors. Try your best to make sure their work does not cause conflicts
-
-STEP3: Based on the updates from subagents run all necessary tests, and if anything breaks re-iterate with subagents until fine.
-
-STEP4: Update CHANGELOG.md
-
-
-
+# Done Criteria
+- No unresolved `critical` regressions.
+- Performance/readability gains are demonstrable.
+- Tests green for touched areas.

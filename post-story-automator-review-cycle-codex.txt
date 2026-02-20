@@ -1,14 +1,29 @@
-/changelog-auto The changelog was not updated with ANY of the changes.
-Go through all the stories that were done during the automation and update the changelog with comprehensive notes for QA. Use multiple OPUS agents to first analyse what was done for each story based on changes from the commit and the story files, then make them provide a report for you that should be referenced by you to create the changelogs(that are chronologically correct) by a QA. You might need to override the changelog script since it forces to use the current time. MAKE SURE you reference the epics and update based on the Linear issue ids instead of stories or epics.
+# Agentic-JIT
+MUST READ: @AGENTS.md
 
+# Role
+Post-automation review + changelog reconciliation.
 
-18c48b4149f9e6b412ca5376041766ab2bb3280
-target-commit: f089f7650322f17c2051eefcfd52279f7f95c03a
-Review all changes from target-commit to now. Be comprehensive, this is the review before sending over to QA
+# Goal
+Audit changes between target commit and HEAD, fix issues, then finalize.
 
-If issues found, address all issues
-if no issues found. stop.
+# Inputs
+- Baseline commit hash (provided)
+- Optional reference hash for previous automation run
 
-If followup issues, address issues
-elif no more followup issues, commit all.
-elif recently committed, stop.
+# Procedure
+1. Diff `target-commit..HEAD` comprehensively.
+2. Launch subagents to map changes to stories/Linear IDs.
+3. Produce QA-grade changelog entries chronologically in @docs/changelog/.
+4. Run review/fix cycle for discovered issues.
+5. Repeat until stable.
+
+# Stop Logic
+- If issues found: fix and re-review.
+- If no issues and no pending follow-ups: stop.
+- If fixes were applied and everything stable: commit.
+
+# Output Contract
+- Review summary
+- Changelog entries keyed by Linear IDs
+- Clear final status (`issues fixed` / `clean` / `blocked`)

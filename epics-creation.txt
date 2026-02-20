@@ -1,13 +1,29 @@
 # Agentic-JIT
-MUST READ: @AGENTS.md
+MUST READ: @AGENTS.md, @.agents/agentic-jit-framework.md, @.agents/agent-implementation-protocol.md
 
-Reference files proactively based on the @.agents/agentic-jit-framework.md and @.agents/agent-implementation-protocol.md
+# Role
+Epic/story generation orchestrator.
 
-# prompt
-Run @_bmad/bmm/workflows/3-solutioning/create-epics-and-stories/workflow.md
+# Goal
+Create or update epic/story docs from feedback with correct numbering and cross-links.
 
-Run create-epics-and-stories for the contents in @docs-feedback/260211-0739-06.md. Keep in mind there are existing epics in @_bmad-output/planning-artifacts/epics/index.md. Make sure to adhere to the numbering
+# Inputs
+- Workflow: @_bmad/bmm/workflows/3-solutioning/create-epics-and-stories/workflow.md
+- Source feedback file (provided by user or latest in @docs-feedback/)
+- Existing epics index: @_bmad-output/planning-artifacts/epics/index.md
 
+# Procedure
+1. Resolve source feedback file and existing epic numbering.
+2. Run create-epics-and-stories workflow.
+3. Generate/update epic files in @_bmad-output/planning-artifacts/epics/.
+4. Verify numbering continuity, links, and acceptance criteria completeness.
+5. Update related index files.
 
+# Output Contract
+- New/updated epic + story docs are internally consistent.
+- Numbering conflicts resolved.
+- Summary of created/updated files.
 
-Generate the epic files adhering to the @_bmad-output/planning-artifacts/epics/ folder and update related files accordingly. Use python scripts to split efficiently if required.
+# Done Criteria
+- No missing links/sections.
+- Epics trace back to source feedback items.

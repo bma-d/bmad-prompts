@@ -1,30 +1,30 @@
 # Agentic-JIT
-MUST READ: @AGENTS.md, @.agents/agent-implementation-protocol.md, @.agents/jit-repo-overrides.md, @.agents/jit-repo-overrides.md
+MUST READ: @AGENTS.md, @.agents/agent-implementation-protocol.md, @.agents/jit-repo-overrides.md
 
-# IDENTITY
-YOU are the orchestrator and decision-maker. BE HYPER context-efficient and offload any research / search / verification / exploration / implementation task to sub-agents by default. ONLY use the Context7 MCP through subagents. You are THE ORCHESTRATOR. The only case where you should manually be doing things is if agents had conflicts that needed resolution.
+# Role
+Pricing strategy synthesis orchestrator. Orchestrate subagents.
 
-# Init
-Project context: @_bmad-output/planning-artifacts/product-brief.md, `_bmad-output/planning-artifacts/project-context.md`, `_bmad-output/planning-artifacts/prd/index.md`, `_bmad-output/planning-artifacts/architecture/index.md`, `_bmad-output/planning-artifacts/epics/index.md`, all files in @docs/ 
+# Goal
+Build evidence-based pricing-tier docs from verified implemented features.
 
-Recent update Changelogs: `docs/changelog/`
+# Inputs
+- Changelogs in @docs/changelog/
+- Implementation artifacts in @_bmad-output/implementation-artifacts/
+- Codebase verification results
 
-- Append all updates that should be referenced by QA according the changelog-auto skill
-- Unrecognized changes: assume other agent; keep going; focus your changes. If it causes issues, stop + ask user. Pass this to subagents as well
-- Offload simple / manual tasks to subagents and scripts. ie) offload 'manual' tasks and anything that doesn't require active thinking in the process. i18n is a great example. 
-- Based on the difficulty of each task, assign opus / sonnet / haiku adaptively for subagents. Use haiku / sonnet ONLY for VERY SIMPLE manual tasks, for anything that might need to think in the process use OPUS. Backend logic, ONLY OPUS
+# Procedure
+1. Launch subagents to inventory clinic-facing features from artifacts/changelogs.
+2. Deduplicate and verify feature existence in code.
+3. Create `docs/pricing/features-v1.md` with verified feature catalog.
+4. Run gap-finder subagents for missed features.
+5. Publish `features-v2.md`.
+6. Launch strategy subagents to propose tier models for target market (clinics in Argentina), each as separate file in `docs/pricing/`.
+7. Launch scoring subagent; create `docs/pricing/scores.md` with explicit scoring rubric (profitability, adoption, upgrade path clarity, delivery risk).
 
-I plan to create a pricing tier and depending on the pricing tier I plan to provide different sets of features for every clinic.
+# Output Contract
+- Verified feature catalog
+- Multiple tier proposals
+- Ranked recommendation with rationale
 
-<CRITICAL> EXECUTE EACH STEP IN ORDER
-Your task is to use multiple subagents to
-1. Search through all the changelogs / implementation artifacts and get a list of features that Turno provides to clinics
-2. You as the main agent consolidate the results from the agents, merge duplicates and send subagents out to verify whether they were implemented properly in the code(verification)
-3. Create an initial draft v1 of features in docs/pricing/ based on the verified results.
-4. Based on the draft send out subagents one more time to verify the features but also send some more to verify whether they haven't missed any features.
-5. Create a draft v2 based on consolidating the subagent's reports
-6. Based on the v2 draft, launch multiple subagent and prompt the following but in different variations. Your prompt should be SIGNIFICANTLY better. Make sure each subagent outputs a file inside the `docs/pricing/` folder each with a different title.
-<ExPrompt>
-Be a business specialist targetting clinics in Argentina and think about how to divide the features so that there is a clear pricing tier, that sufficietly nudges the clinic to move on to the next pricing tier depending on size and need.
-</ExPrompt>
-7. Read all of the results of the subagents, and launch a `scoring subagent` that scores each of the reports. Make the prompt yourself that will score based on what will be the most profitable. Add the final score of each report as `scores.md` in the same folder.
+# Done Criteria
+- Final recommendation traces directly to verified capabilities.

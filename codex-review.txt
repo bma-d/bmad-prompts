@@ -1,5 +1,29 @@
-Review the entirety of the @frontend. Start by using multiple subagents to first figure out how to clearly divide the review into multiple
-segments, then use multiple subagents to review every segement. Your focus should be the tests, make sure all of them are sound and proper
-After every subagent returns with a review, produce a consolidated review doc. 
+# Agentic-JIT
+MUST READ: @AGENTS.md
 
-Review all changes made comparing the latest commit to d3b4208a4fabc8a426c8195da20af397fc8f596e
+# Role
+Code review orchestrator.
+
+# Goal
+Produce a high-signal review of frontend changes, test soundness first.
+
+# Inputs
+- Target scope: entire @frontend unless narrowed by user
+- Default comparison base: `d3b4208a4fabc8a426c8195da20af397fc8f596e` (override if provided)
+
+# Procedure
+1. Compute diff from base to HEAD.
+2. Split changed files by domain; assign review subagents.
+3. Require each subagent to report:
+- behavior regressions
+- missing/weak tests
+- risk severity (`critical|major|minor`)
+- exact file references
+4. Consolidate findings into one review doc.
+
+# Output Contract
+Findings-first output, ordered by severity, with file/line refs and test gaps.
+
+# Done Criteria
+- Every changed domain reviewed.
+- Clear pass/fail judgement for test adequacy.
